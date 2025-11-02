@@ -41,6 +41,61 @@ This lab demonstrates the design, deployment, and maintenance of a defensive cyb
 - **Proxmox** hosts all virtual machines and provides internal virtual bridges (`vmbr1`, `vmbr2`, etc.) connecting VLAN-tagged traffic to pfSense.  
 - **Wazuh** collects logs and telemetry from all monitored systems through the Wazuh Agent.  
 - **Kali Linux** is isolated on the attacker VLAN, generating simulated threat activity to test detection and response.  
-- **Windows Server (Active Directory)** handles domain services (DNS, DHCP, authentication) for Windows endpoints on VLAN 10.  
+- **Windows Server (Active Directory)** handles domain services (DNS, DHCP, authentication) for Windows endpoints on VLAN 10.
+
+- ## Setup & Deployment Overview
+
+This section outlines how the SOC lab was deployed and configured on Proxmox VE. Each stage focuses on creating a realistic, isolated environment for security monitoring and adversary simulation.
+
+### 1. Proxmox Installation & Host Configuration
+- Installed **Proxmox VE** on a dedicated **AMD-based host** with virtualization support (AMD-V enabled).   
+- Configured local storage pools for VM images (NVMe SSD for high-speed operations and caching, a SATA SSD for VM disk images, HDD's for backups, ISO storage, and archived data).  
+- Created multiple **virtual bridges** (`vmbr1`, `vmbr2`, `vmbr3`) to represent VLAN 10, 20, and 30.  
+- The host itself resides on the **home LAN** (not part of VLANs) for management access.
+
+### 2. pfSense Deployment
+- Deployed **pfSense** as a virtual firewall and router on Proxmox, connected to VLANs 10, 20, and 30.  
+- Configured **VLAN interfaces**:  
+  - VLAN 10 – Windows domain network (handled by Windows Server for DHCP/DNS)  
+  - VLAN 20 – SOC monitoring network (pfSense provides DHCP/DNS)  
+  - VLAN 30 – Attacker network (pfSense provides DHCP/DNS)  
+- Implemented **NAT and inter-VLAN routing** with strict firewall rules to isolate traffic between VLANs.  
+- Forwarded **DNS queries from VLAN 10** to the Windows Server to maintain Active Directory name resolution consistency.  
+- Configured **pfSense DNS Resolver** for VLANs 20 and 30 and set gateway access controls to limit exposure between zones.
+
+
+### 3. Wazuh Server Setup
+- Deployed an **Ubuntu LXC container** on VLAN 20 to host the **Wazuh Manager**, providing SIEM and endpoint monitoring functionality with minimal resource overhead.  
+- Installed and configured **Wazuh Manager**, **Filebeat**, and the **Wazuh Dashboard** services within the container.  
+- Used a separate **Ubuntu virtual machine** on the same VLAN as a **management workstation** to securely access the Wazuh web GUI and perform SOC analysis.  
+- Connected Windows and Linux endpoints to the Wazuh Manager using the **Wazuh Agent** for centralized log collection and alerting.  
+- Verified agent registration, confirmed active status, and generated test alerts to validate event visibility and rule accuracy.
+
+
+### 4. Windows Server & Client Configuration
+- Installed **Windows Server 2019/2022** on VLAN10 and promoted it to a **Domain Controller**.  
+- Configured **Active Directory**, **DNS**, and **DHCP** roles.  
+- Joined **Windows 11 clients** to the domain.  
+- Deployed Wazuh agents via Group Policy or manual installation.
+
+### 5. Kali Linux (Attacker VM)
+- Deployed a **Kali Linux VM** on VLAN30 for red-team simulation.  
+- Verified isolation between attacker and production VLANs using pfSense firewall policies.  
+- Used Kali for reconnaissance (Nmap), credential attacks, and exploit simulation to generate SOC alerts.
+
+### 6. Validation & Testing
+- Verified all systems had network connectivity to pfSense and Wazuh Manager.  
+- Confirmed Wazuh received endpoint logs, pfSense firewall logs, and system events.  
+- Executed basic attack simulations (brute-force, scans, privilege escalation) to test alerting accuracy.
+
+### 7. Management & Maintenance
+- Snapshotted each VM after successful configuration.  
+- Backed up pfSense and Wazuh configurations for quick recovery.  
+- Regularly update VMs and Wazuh components to maintain functionality and security.
+
+---
+
+This configuration provides a stable, realistic environment for practicing SOC workflows, incident response, and defensive analysis across diverse operating systems and network layers.
+
 
 
