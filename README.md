@@ -24,7 +24,7 @@ This lab demonstrates the design, deployment, and maintenance of a defensive cyb
 | VLAN | Subnet | Purpose | Example Systems |
 |------|---------|----------|----------------|
 | — | Home LAN (unsegmented) | Management and Proxmox connectivity | Proxmox host, pfSense WAN interface |
-| VLAN 10 | 10.0.1.0/24 | Windows Sever and endpoints  | Windows 11 clients |
+| VLAN 10 | 10.0.1.0/24 | Windows Sever and user endpoint | Windows Server, Windows 11 clients |
 | VLAN 20 | 10.0.2.0/24 | SOC infrastructure and monitoring | Wazuh server, Ubuntu admin box |
 | VLAN 30 | 10.0.3.0/24 | Attacker network for adversary simulation | Kali Linux |
 
