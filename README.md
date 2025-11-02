@@ -43,5 +43,4 @@ This lab demonstrates the design, deployment, and maintenance of a defensive cyb
 - **Kali Linux** is isolated on the attacker VLAN, generating simulated threat activity to test detection and response.  
 - **Windows Server (Active Directory)** handles domain services (DNS, DHCP, authentication) for Windows endpoints on VLAN 10.  
 
-### Diagram Placeholder
 
