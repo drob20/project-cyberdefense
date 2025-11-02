@@ -20,7 +20,8 @@ Ubuntu — analysis/administrative tools (forensics, tooling, scripts)
 
 This lab demonstrates the design, deployment, and maintenance of a defensive cyber infrastructure that mirrors small-to-medium enterprise operations, providing practical experience in threat visibility, incident response, detection engineering, and adversary emulation.
 
-##Network Architecture
+## Network Architecture
+
 | VLAN | Subnet | Purpose | Example Systems |
 |------|---------|----------|----------------|
 | — | Home LAN (unsegmented) | Management and Proxmox connectivity | Proxmox host, pfSense WAN interface |
@@ -29,7 +30,7 @@ This lab demonstrates the design, deployment, and maintenance of a defensive cyb
 | VLAN 30 | 10.0.3.0/24 | Attacker network for adversary simulation | Kali Linux |
 
 
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/6592415c-2e0c-4661-b4ab-0e01696246b3" />
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/18d1296c-2574-4add-b611-ad55fd81fbbe" />
 
 
 
