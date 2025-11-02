@@ -29,7 +29,7 @@ This lab demonstrates the design, deployment, and maintenance of a defensive cyb
 | VLAN 30 | 10.0.3.0/24 | Attacker network for adversary simulation | Kali Linux |
 
 ### Diagram Placeholder
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/9d7f31a7-5aa8-4e65-8fe0-f40444ba675a" />
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/6592415c-2e0c-4661-b4ab-0e01696246b3" />
 
 
 
