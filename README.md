@@ -68,11 +68,12 @@ This section outlines how the SOC lab was deployed and configured on Proxmox VE.
 - Configured **pfSense DNS Resolver** for VLANs 20 and 30 and set gateway access controls to limit exposure between zones.
 
 ### 3. Suricata Intrusion Detection / Prevention Integration
--Installed Suricata directly on pfSense to provide inline network-based threat detection and traffic inspection.
--Enabled Emerging Threats Open (ET Open) ruleset for continuous signature updates.
--Configured Suricata to run on key VLAN interfaces to monitor east-west and ingress traffic.
--Enabled EVE JSON logging and forwarded Suricata alert logs to the Wazuh Manager for correlation and alerting.
--Verified end-to-end visibility by generating controlled attack traffic (e.g., Nmap scans, brute-force attempts) and confirming corresponding Suricata alerts were displayed in the Wazuh Dashboard.
+
+- Installed **Suricata** directly on **pfSense** to provide inline network-based threat detection and traffic inspection.
+- Enabled the **Emerging Threats Open (ET Open)** ruleset for continuous signature updates.
+- Configured Suricata to run on key **VLAN interfaces** to monitor both east-west and ingress network traffic.
+- Enabled **EVE JSON logging** and forwarded Suricata alert logs to the **Wazuh Manager** for centralized correlation and alerting.
+- Verified end-to-end visibility by generating controlled attack traffic (e.g., **Nmap scans**, brute-force attempts) and confirming corresponding Suricata alerts in the **Wazuh Dashboard**.
 
 ### 4. Wazuh Server & SOC Analyst Workstation
 - Deployed **Wazuh Manager** on an Ubuntu LXC container in **VLAN 20**.
