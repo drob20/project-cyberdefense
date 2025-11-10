@@ -49,7 +49,8 @@ This lab demonstrates the design, deployment, and maintenance of a defensive cyb
 ## Setup & Deployment Overview
 
 This section outlines how the SOC lab was deployed and configured on Proxmox VE. Each stage focuses on creating a realistic, isolated environment for security monitoring and adversary simulation.
-<img width="1910" height="786" alt="Proxmox environment " src="https://github.com/user-attachments/assets/4a09cf9d-8711-48d7-a3e2-66cccc126f3f" />
+<img width="2852" height="864" alt="image" src="https://github.com/user-attachments/assets/442c658f-9b0d-4351-a0c6-2e035c09d579" />
+
 
 ### 1. Proxmox Installation & Host Configuration
 
