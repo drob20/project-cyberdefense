@@ -49,6 +49,7 @@ This lab demonstrates the design, deployment, and maintenance of a defensive cyb
 ## Setup & Deployment Overview
 
 This section outlines how the SOC lab was deployed and configured on Proxmox VE. Each stage focuses on creating a realistic, isolated environment for security monitoring and adversary simulation.
+<img width="1910" height="786" alt="Proxmox environment " src="https://github.com/user-attachments/assets/4a09cf9d-8711-48d7-a3e2-66cccc126f3f" />
 
 ### 1. Proxmox Installation & Host Configuration
 - Installed **Proxmox VE** on a dedicated **AMD-based host** with virtualization support (AMD-V enabled).   
@@ -66,32 +67,46 @@ This section outlines how the SOC lab was deployed and configured on Proxmox VE.
 - Forwarded **DNS queries from VLAN 10** to the Windows Server to maintain Active Directory name resolution consistency.  
 - Configured **pfSense DNS Resolver** for VLANs 20 and 30 and set gateway access controls to limit exposure between zones.
 
+### 3. Suricata Intrusion Detection / Prevention Integration
+-Installed Suricata directly on pfSense to provide inline network-based threat detection and traffic inspection.
+-Enabled Emerging Threats Open (ET Open) ruleset for continuous signature updates.
+-Configured Suricata to run on key VLAN interfaces to monitor east-west and ingress traffic.
+-Enabled EVE JSON logging and forwarded Suricata alert logs to the Wazuh Manager for correlation and alerting.
+-Verified end-to-end visibility by generating controlled attack traffic (e.g., Nmap scans, brute-force attempts) and confirming corresponding Suricata alerts were displayed in the Wazuh Dashboard.
 
-### 3. Wazuh Server Setup
-- Deployed an **Ubuntu LXC container** on VLAN 20 to host the **Wazuh Manager**, providing SIEM and endpoint monitoring functionality with minimal resource overhead.  
-- Installed and configured **Wazuh Manager**, **Filebeat**, and the **Wazuh Dashboard** services within the container.  
-- Used a separate **Ubuntu virtual machine** on the same VLAN as a **management workstation** to securely access the Wazuh web GUI and perform SOC analysis.  
-- Connected Windows and Linux endpoints to the Wazuh Manager using the **Wazuh Agent** for centralized log collection and alerting.  
-- Verified agent registration, confirmed active status, and generated test alerts to validate event visibility and rule accuracy.
+### 4. Wazuh Server & SOC Analyst Workstation
+- Deployed **Wazuh Manager** on an Ubuntu LXC container in **VLAN 20**.
+- Installed:
+  - Wazuh Manager
+  - Wazuh Dashboard
+  - Filebeat for log ingestion
+- Forwarded Suricata **EVE JSON** alerts to Wazuh for correlated network + host alerting.
+- Installed Wazuh Agents on Windows and Linux systems for endpoint telemetry.
 
+#### Ubuntu SOC Analyst Workstation
+- Deployed an Ubuntu Desktop VM in VLAN 20 for SOC analyst operations.
+- Used to:
+  - Access the Wazuh Dashboard
+  - Perform security investigations, log analysis, and threat hunting
+  - Analyze captured network and host telemetry
 
-### 4. Windows Server & Client Configuration
+### 5. Windows Server & Client Configuration
 - Installed **Windows Server 2022** on VLAN10 and promoted it to a **Domain Controller**.  
 - Configured **Active Directory**, **DNS**, and **DHCP** roles.  
 - Joined **Windows 10 clients** to the domain.  
 - Deployed Wazuh agents via manual installation.
 
-### 5. Kali Linux (Attacker VM)
+### 6. Kali Linux (Attacker VM)
 - Deployed a **Kali Linux VM** on VLAN30 for red-team simulation.  
 - Verified isolation between attacker and production VLANs using pfSense firewall policies.  
 - Used Kali for reconnaissance (Nmap), credential attacks, and exploit simulation to generate SOC alerts.
 
-### 6. Validation & Testing
+### 7. Validation & Testing
 - Verified all systems had network connectivity to pfSense and Wazuh Manager.  
 - Confirmed Wazuh received endpoint logs, pfSense firewall logs, and system events.  
 - Executed basic attack simulations (brute-force, scans, privilege escalation) to test alerting accuracy.
 
-### 7. Management & Maintenance
+### 8. Management & Maintenance
 - Snapshotted each VM after successful configuration.  
 - Backed up pfSense and Wazuh configurations for quick recovery.  
 - Regularly update VMs and Wazuh components to maintain functionality and security.
