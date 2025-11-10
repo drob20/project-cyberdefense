@@ -25,7 +25,7 @@ This lab demonstrates the design, deployment, and maintenance of a defensive cyb
 | VLAN | Subnet | Purpose | Example Systems |
 |------|---------|----------|----------------|
 | — | Home LAN (unsegmented) | Management and Proxmox connectivity | Proxmox host, pfSense WAN interface |
-| VLAN 10 | 10.0.1.0/24 | Windows Sever and user endpoint | Windows Server, Windows 11 clients |
+| VLAN 10 | 10.0.1.0/24 | Windows Sever and user endpoint | Windows Server, Windows 10/11 clients |
 | VLAN 20 | 10.0.2.0/24 | SOC infrastructure and monitoring | Wazuh server, Ubuntu admin box |
 | VLAN 30 | 10.0.3.0/24 | Attacker network for adversary simulation | Kali Linux |
 
@@ -73,7 +73,7 @@ This section outlines how the SOC lab was deployed and configured on Proxmox VE.
 
 
 ### 4. Windows Server & Client Configuration
-- Installed **Windows Server 2019/2022** on VLAN10 and promoted it to a **Domain Controller**.  
+- Installed **Windows Server 2022** on VLAN10 and promoted it to a **Domain Controller**.  
 - Configured **Active Directory**, **DNS**, and **DHCP** roles.  
 - Joined **Windows 11 clients** to the domain.  
 - Deployed Wazuh agents via Group Policy or manual installation.
