@@ -95,6 +95,7 @@ This section outlines how the SOC lab was deployed and configured on Proxmox VE.
 - Configured **Active Directory**, **DNS**, and **DHCP** roles.  
 - Joined **Windows 10 clients** to the domain.  
 - Deployed Wazuh agents via manual installation.
+- Installed and Enabled Sysmon-based endpoint monitoring with a hardened config, forwarding logs to Wazuh for real-time threat detection, incident triage, and long-term hunt queries.
 
 ### 6. Kali Linux (Attacker VM)
 - Deployed a **Kali Linux VM** on VLAN30 for red-team simulation.  
