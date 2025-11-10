@@ -58,8 +58,7 @@ This section outlines how the SOC lab was deployed and configured on Proxmox VE.
 - Created multiple **virtual bridges** (`vmbr1`, `vmbr2`, `vmbr3`) to represent VLAN 10, 20, and 30.  
 - The host itself resides on the **home LAN** (not part of VLANs) for management access.
 
-### 2. pfSense Deployment <img width="414" height="122" alt="pfSenselogog" src="https://github.com/user-attachments/assets/39f1b614-9e25-4fb3-8bbc-afa4ec27fe68" />
-
+### 2. pfSense Deployment
 - Deployed **pfSense** as a virtual firewall and router on Proxmox, connected to VLANs 10, 20, and 30.  
 - Configured **VLAN interfaces**:  
   - VLAN 10 – Windows domain network (handled by Windows Server for DHCP/DNS)  
@@ -69,7 +68,7 @@ This section outlines how the SOC lab was deployed and configured on Proxmox VE.
 - Forwarded **DNS queries from VLAN 10** to the Windows Server to maintain Active Directory name resolution consistency.  
 - Configured **pfSense DNS Resolver** for VLANs 20 and 30 and set gateway access controls to limit exposure between zones.
 
-### 3. Suricata Intrusion Detection / Prevention Integration ![Suricatalogog](https://github.com/user-attachments/assets/518fa02c-aaa0-492e-8982-5c31127c09f2)
+### 3. Suricata Intrusion Detection / Prevention Integration 
 
 
 - Installed **Suricata** directly on **pfSense** to provide inline network-based threat detection and traffic inspection.
@@ -78,7 +77,7 @@ This section outlines how the SOC lab was deployed and configured on Proxmox VE.
 - Enabled **EVE JSON logging** and forwarded Suricata alert logs to the **Wazuh Manager** for centralized correlation and alerting.
 - Verified end-to-end visibility by generating controlled attack traffic (e.g., **Nmap scans**, brute-force attempts) and confirming corresponding Suricata alerts in the **Wazuh Dashboard**.
 
-### 4. Wazuh Server & SOC Analyst Workstation <img width="225" height="225" alt="wazuhlogo" src="https://github.com/user-attachments/assets/c73b557c-813a-4e93-b4c4-6db0e4f8c9ee" />
+### 4. Wazuh Server & SOC Analyst Workstation 
 
 - Deployed **Wazuh Manager** on an Ubuntu LXC container in **VLAN 20**.
 - Installed:
@@ -88,15 +87,14 @@ This section outlines how the SOC lab was deployed and configured on Proxmox VE.
 - Forwarded Suricata **EVE JSON** alerts to Wazuh for correlated network + host alerting.
 - Installed Wazuh Agents on Windows and Linux systems for endpoint telemetry.
 
-#### Ubuntu SOC Analyst Workstation <img width="225" height="225" alt="ubuntulogo" src="https://github.com/user-attachments/assets/7bf34e06-0381-4d0c-857d-8b1b04446229" />
-
+#### Ubuntu SOC Analyst Workstation
 - Deployed an Ubuntu Desktop VM in VLAN 20 for SOC analyst operations.
 - Used to:
   - Access the Wazuh Dashboard
   - Perform security investigations, log analysis, and threat hunting
   - Analyze captured network and host telemetry
 
-### 5. Windows Server & Client Configuration <img width="225" height="225" alt="Windowslogo" src="https://github.com/user-attachments/assets/767ea19f-9d64-4c10-bfb0-a25069ba1b84" />
+### 5. Windows Server & Client Configuration 
 
 - Installed **Windows Server 2022** on VLAN10 and promoted it to a **Domain Controller**.  
 - Configured **Active Directory**, **DNS**, and **DHCP** roles.  
@@ -104,8 +102,7 @@ This section outlines how the SOC lab was deployed and configured on Proxmox VE.
 - Deployed Wazuh agents via manual installation.
 - Installed and Enabled Sysmon-based endpoint monitoring with a hardened config, forwarding logs to Wazuh for real-time threat detection, incident triage, and long-term hunt queries.
 
-### 6. Kali Linux (Attacker VM) ![kalilogo](https://github.com/user-attachments/assets/96f15035-9db4-4474-ae9b-0fa93958c4b0)
-
+### 6. Kali Linux (Attacker VM)
 - Deployed a **Kali Linux VM** on VLAN30 for red-team simulation.  
 - Verified isolation between attacker and production VLANs using pfSense firewall policies.  
 - Used Kali for reconnaissance (Nmap), credential attacks, and exploit simulation to generate SOC alerts.
