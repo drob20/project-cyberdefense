@@ -10,6 +10,8 @@ Proxmox VE — virtualization and resource management
 
 pfSense — firewall, routing, VLAN segmentation
 
+Suricata — network IDS/IPS for deep packet inspection, rule-based threat detection, and alert forwarding to Waz
+
 Wazuh — SIEM / EDR / centralized log analysis
 
 Kali Linux — attacker VM for red-team simulation and traffic generation
