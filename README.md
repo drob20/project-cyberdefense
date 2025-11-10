@@ -39,13 +39,14 @@ This lab demonstrates the design, deployment, and maintenance of a defensive cyb
 
 ### Network Flow Summary 
 - The **Proxmox host** itself is **not part of the VLANs** and resides on a separate management/home LAN for stability and out-of-band access.
-- **pfSense** functions as the main firewall and router for VLANs 10, 20, and 30, enforcing inter-VLAN security policies.  
+- **pfSense** functions as the main firewall and router for VLANs 10, 20, and 30, enforcing inter-VLAN security policies.
+- Suricata (IDS/IPS) — deployed to inspect traffic and generate alerts; integrated with pfSense or run as a dedicated VM/container attached to a mirrored/SPAN or inline path. Alerts and EVE JSON logs forwarded to Wazuh for central correlation. 
 - **Proxmox** hosts all virtual machines and provides internal virtual bridges (`vmbr1`, `vmbr2`, etc.) connecting VLAN-tagged traffic to pfSense.  
 - **Wazuh** collects logs and telemetry from all monitored systems through the Wazuh Agent.  
 - **Kali Linux** is isolated on the attacker VLAN (Can be moved to internal VLAN 20), generating simulated threat activity to test detection and response.  
 - **Windows Server (Active Directory)** handles domain services (DNS, DHCP, authentication) for Windows endpoints on VLAN 10.
 
-- ## Setup & Deployment Overview
+## Setup & Deployment Overview
 
 This section outlines how the SOC lab was deployed and configured on Proxmox VE. Each stage focuses on creating a realistic, isolated environment for security monitoring and adversary simulation.
 
