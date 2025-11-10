@@ -79,7 +79,7 @@ This section outlines how the SOC lab was deployed and configured on Proxmox VE.
 - Installed **Windows Server 2022** on VLAN10 and promoted it to a **Domain Controller**.  
 - Configured **Active Directory**, **DNS**, and **DHCP** roles.  
 - Joined **Windows 10 clients** to the domain.  
-- Deployed Wazuh agents via Group Policy or manual installation.
+- Deployed Wazuh agents via manual installation.
 
 ### 5. Kali Linux (Attacker VM)
 - Deployed a **Kali Linux VM** on VLAN30 for red-team simulation.  
