@@ -1,6 +1,6 @@
 # project-cyberdefense
 A Proxmox-based Security Operations Center (SOC) lab environment simulating enterprise blue team operations using pfSense, Wazuh, and Windows/Linux endpoints.
-This project showcases a fully virtualized Security Operations Center (SOC) lab built on Proxmox VE. The environment simulates a small enterprise network segmented into multiple VLANs with pfSense for routing and firewalling, Wazuh for SIEM and endpoint monitoring, Kali Linux to simulate attacker activity, and a mix of Windows Server, Windows 10/11, and Ubuntu systems.
+This project showcases a fully virtualized Security Operations Center (SOC) lab built on Proxmox VE. The environment simulates a small enterprise network segmented into multiple VLANs with pfSense for routing and firewalling, Wazuh for SIEM and endpoint monitoring, Kali Linux to simulate attacker activity, and a mix of Windows Server, Windows 10, and Ubuntu systems.
 
 ## Overview
 The purpose of this lab is to replicate real-world SOC workflows—log collection, alert triage, threat detection, and response—within a controlled, virtualized environment. It serves as a platform for continuous hands-on learning in cybersecurity, focusing on blue team operations, defensive monitoring, and adversary simulation.
@@ -78,7 +78,7 @@ This section outlines how the SOC lab was deployed and configured on Proxmox VE.
 ### 4. Windows Server & Client Configuration
 - Installed **Windows Server 2022** on VLAN10 and promoted it to a **Domain Controller**.  
 - Configured **Active Directory**, **DNS**, and **DHCP** roles.  
-- Joined **Windows 11 clients** to the domain.  
+- Joined **Windows 10 clients** to the domain.  
 - Deployed Wazuh agents via Group Policy or manual installation.
 
 ### 5. Kali Linux (Attacker VM)
