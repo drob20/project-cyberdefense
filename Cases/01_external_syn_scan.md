@@ -24,8 +24,7 @@ VLAN 30 -> Attacker / Testing Network
 ```
 
 ---
-
-## 🎯 Scan Objective
+# 🎯 Scan Objective
 
 Perform a controlled external scan from the attacker VLAN to the Windows target and observe:
 
@@ -35,7 +34,7 @@ Perform a controlled external scan from the attacker VLAN to the Windows target 
 
 ---
 
-## 🛠 Scan Command
+# 🛠 Scan Command
 
 Run from Kali Linux:
 
