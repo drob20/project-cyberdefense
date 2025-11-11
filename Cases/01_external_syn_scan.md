@@ -72,12 +72,6 @@ Allow inbound ANY TCP during test only.
 
 After capturing evidence, the firewall rule was removed to restore secure posture.
 
-## Key Takeaways
-
-- Network segmentation determines what traffic is visible and to whom
-- For Suricata to analyze SMB, the SMB service must be reachable
-- Wazuh provides structured alert data useful for SOC triage
-- Even a basic scan provides meaningful detection practice
 
 ## 💾 pfSense Log capture & PCAP Evidence 
 <img width="1158" height="620" alt="loggsexmaple" src="https://github.com/user-attachments/assets/97d35f56-c9c0-48be-8c72-5be0b7ace50e" />
@@ -93,6 +87,12 @@ After capturing evidence, the firewall rule was removed to restore secure postur
   - When the scan completes, click Stop. Then click Download Capture to save the .pcap file to your analysis machine. Save as smb_probe.pcap.
 Inspect locally with Wireshark / tshark:
 
+## Key Takeaways
+
+- Network segmentation determines what traffic is visible and to whom
+- For Suricata to analyze SMB, the SMB service must be reachable
+- Wazuh provides structured alert data useful for SOC triage
+- Even a basic scan provides meaningful detection practice
 
 
 ## Future Expansion Roadmap
