@@ -46,7 +46,7 @@ This is identical to Zenmap preset **Intense Scan, No Ping**.
 
 <img width="900" height="384" alt="znmap" src="https://github.com/user-attachments/assets/0cc0ed0a-3e47-4746-af3c-8affb567495c" />
 
-## 🧾 Scan Results (Summary)
+**🧾 Scan Results (Summary)
 
 | Detail                 | Result                          |
 | ---------------------- | ------------------------------- |
