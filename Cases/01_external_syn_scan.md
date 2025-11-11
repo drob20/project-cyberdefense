@@ -79,6 +79,22 @@ After capturing evidence, the firewall rule was removed to restore secure postur
 - Wazuh provides structured alert data useful for SOC triage
 - Even a basic scan provides meaningful detection practice
 
+## 💾 pfSense Log capture & PCAP Evidence 
+<img width="1158" height="620" alt="loggsexmaple" src="https://github.com/user-attachments/assets/97d35f56-c9c0-48be-8c72-5be0b7ace50e" />
+
+- I was able to see and log the live traffic from the scan.
+  - Log into pfSense GUI (https://<pfsense_ip>/) with admin credentials.
+  - Navigate to Diagnostics → Packet Capture.
+  - Interface: choose the interface that sees the traffic (e.g., vnnet1, lan, or the mirror/tap interface).
+  - Host Address: (optional) (source) or (dest) to filter.
+  - Port: 445 (to capture SMB only) — or leave blank to capture full traffic (I used full TCP traffic).
+  - Count / Length: optional (leave default to capture entire session).
+  - Click Start. Re-run the Nmap scan from Kali while capture is running.
+  - When the scan completes, click Stop. Then click Download Capture to save the .pcap file to your analysis machine. Save as smb_probe.pcap.
+Inspect locally with Wireshark / tshark:
+
+
+
 ## Future Expansion Roadmap
 
 | Planned Improvement                   | Purpose                                   |
